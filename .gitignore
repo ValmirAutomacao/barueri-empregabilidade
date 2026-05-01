@@ -1,0 +1,55 @@
+# Documentação sensível (manter apenas local)
+*.md
+!PLANO_DESENVOLVIMENTO.md
+*.xlsx
+
+# Dependências
+node_modules/
+__pycache__/
+*.pyc
+.Python
+env/
+venv/
+.venv
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Env files
+.env
+.env.local
+.env.*.local
+
+# Build outputs
+dist/
+build/
+*.egg-info/
+
+# Logs
+*.log
+logs/
+
+# Temporary files
+tmp/
+temp/
+
+# Environment & Secrets (AIOX)
+*.key
+*.pem
+
+# Dependencies (AIOX)
+node_modules
+
+# AIOX Local (AIOX)
+.aiox-core/local/
+.claude/settings.local.json
+.aiox/install-log.txt
+cuca-portal/.open-next/

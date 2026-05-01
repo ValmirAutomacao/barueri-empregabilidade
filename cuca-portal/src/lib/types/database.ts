@@ -1,0 +1,250 @@
+// Types do banco de dados Supabase
+
+export type Lead = {
+    id: string
+    telefone: string
+    nome: string | null
+    email: string | null
+    unidade_cuca: string | null
+    origem: string | null
+    tags: string[] | null
+    opt_in: boolean
+    bloqueado: boolean
+    motivo_bloqueio: string | null
+    data_nascimento: string | null
+    equipamentos_principais: string[]
+    atividades_principais: string[]
+    created_at: string
+    updated_at: string
+}
+
+export type LeadAtividade = {
+    id: string
+    lead_id: string
+    equipamento: string
+    atividade: string
+    contagem: number
+    created_at: string
+}
+
+export type Conversa = {
+    id: string
+    lead_id: string
+    instancia_uazapi: string
+    agente_tipo: string
+    status: string
+    ultima_mensagem_em: string | null
+    created_at: string
+    updated_at: string
+}
+
+export type Mensagem = {
+    id: string
+    conversa_id: string
+    lead_id: string
+    tipo: 'text' | 'image' | 'audio' | 'video' | 'document' | 'location'
+    conteudo: string | null
+    midia_url: string | null
+    transcricao: string | null
+    sentimento: string | null
+    sentimento_score: number | null
+    remetente: 'lead' | 'agente'
+    created_at: string
+}
+
+export type EventoPontual = {
+    id: string
+    titulo: string
+    descricao: string | null
+    unidade_cuca: string
+    data_evento: string
+    data_inicio: string
+    data_fim: string | null
+    hora_inicio: string | null
+    hora_fim: string | null
+    local: string | null
+    capacidade: number | null
+    flyer_url: string | null
+    segmentacao_id: string | null
+    disparo_id: string | null
+    status: string
+    expansiva: boolean
+    categorias_alvo: string[] | null
+    created_by: string | null
+    created_at: string
+    updated_at: string
+}
+
+export type CampanhaMensal = {
+    id: string
+    mes: number
+    ano: number
+    titulo: string
+    descricao: string | null
+    unidade_cuca_id: string | null
+    unidade_cuca: string | null
+    arquivo_excel_url: string | null
+    total_atividades: number
+    disparo_id: string | null
+    status: string
+    created_by: string | null
+    created_at: string
+    updated_at: string
+}
+
+export type Vaga = {
+    id: string
+    empresa_id: string
+    titulo: string
+    descricao: string
+    requisitos: string | null
+    salario: string | null
+    beneficios: string | null
+    tipo_contrato: string | null
+    carga_horaria: string | null
+    local: string | null
+    unidade_cuca: string | null
+    unidade_destino: string | null
+    setor: string[] | null
+    total_vagas: number
+    limite_curriculos: number | null
+    escolaridade_minima: string | null
+    status: string
+    faixa_etaria: string | null
+    local_entrevista: string | null
+    tipo_selecao: string | null
+    expansiva: boolean
+    email_contato_empresa: string | null
+    telefone_responsavel: string | null
+    data_abertura: string
+    data_fechamento: string | null
+    disparo_id: string | null
+    numero_vaga: number | null
+    pcd_vaga: boolean | null
+    pcd_tipo: string | null
+    pcd_homologado: boolean | null
+    created_by: string | null
+    created_at: string
+    updated_at: string
+    // SQS-49: campos de processo seletivo por evento
+    tipo: 'vaga_normal' | 'selecao_evento' | null
+    cargos_lista: Array<{ titulo: string; quantidade: string; faixa_etaria: string }> | null
+    datas_selecao: Array<{ data: string; hora: string }> | null
+    email_responsavel: string | null
+}
+
+export type EmpregabilidadeFollowup = {
+    id: string
+    candidatura_id: string
+    tipo: 'empresa' | 'candidato' | 'interno'
+    mensagem: string
+    enviado_por: string | null
+    status: string
+    created_at: string
+}
+
+export type Empresa = {
+    id: string
+    nome: string
+    cnpj: string | null
+    telefone: string | null
+    email: string | null
+    endereco: string | null
+    setor: string | null
+    porte: string | null
+    contato_responsavel: string | null
+    ativa: boolean
+    created_by: string | null
+    created_at: string
+    updated_at: string
+}
+
+export type Feedback = {
+    id: string
+    lead_id: string | null
+    tipo: 'critica' | 'sugestao' | 'elogio'
+    categoria: string | null
+    unidade_cuca: string | null
+    mensagem: string
+    anonimo: boolean
+    sentimento: string | null
+    sentimento_score: number | null
+    status: string
+    resposta: string | null
+    respondido_por: string | null
+    respondido_em: string | null
+    created_at: string
+}
+
+export type Candidatura = {
+    id: string
+    vaga_id: string
+    nome: string
+    data_nascimento: string
+    telefone: string
+    arquivo_cv_url: string | null
+    dados_ocr_json: any
+    requisitos_atendidos: string
+    status: string
+    observacoes: string | null
+    match_score: number | null
+    area_interesse: string[] | null
+    email_enviado_em: string | null
+    email_enviado_para: string | null
+    unidade_cuca: string | null
+    data_entrevista: string | null
+    hora_entrevista: string | null
+    local_entrevista: string | null
+    created_at: string
+    updated_at: string
+}
+
+export type Campanha = {
+    id: string
+    unidade_cuca_id: string
+    titulo: string
+    template_texto: string
+    midia_url: string | null
+    publico_alvo: Record<string, any>
+    agendamento: string | null
+    status: 'rascunho' | 'aguardando_aprovacao' | 'aprovada' | 'em_andamento' | 'concluida' | 'cancelada' | 'pausada'
+    created_by: string
+    created_at: string
+    updated_at: string
+}
+
+export type TalentBank = {
+    id: string
+    nome: string
+    data_nascimento: string | null
+    telefone: string | null
+    candidatura_origem_id: string | null
+    vaga_origem_id: string | null
+    skills_jsonb: any
+    curriculo_estruturado: Record<string, any> | null
+    status: string
+    arquivo_cv_url: string | null
+    area_interesse: string[] | null
+    created_at: string
+    updated_at: string
+}
+
+export type Curriculo = {
+    id: string
+    talent_id: string
+    dados: Record<string, any>
+    deleted_at: string | null
+    created_at: string
+    updated_at: string
+}
+
+export type HumanHandoverContact = {
+    id: string
+    modulo: string
+    unidade_cuca: string | null
+    telefone_destino: string
+    nome_responsavel: string | null
+    ativo: boolean
+    created_at: string
+    updated_at: string
+}
